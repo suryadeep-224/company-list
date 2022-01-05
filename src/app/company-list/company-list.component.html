@@ -1,0 +1,53 @@
+<h2>Filter</h2>
+
+
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Filter by city</label>
+    <select class="form-control" (change)="onChange()" [(ngModel)]="cityValue" id="exampleFormControlSelect1">
+      <option value="knox">Knox</option>
+      <option value="bend">Bend</option>
+      <option value="denver">Denver</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlSelect2">Filter by name</label>
+    <input type="text" (keyup)="onEnterName($event.target)">
+  </div>
+
+<br>
+<br>
+
+<h2>Companies</h2>
+
+<div *ngFor="let company of companies">
+    <h3>
+        <a [title]="company.name + ' details'">
+            {{ company.name }}
+        </a>
+    </h3>
+
+    <p *ngIf="company.brewery_type">
+        Brewery Type: {{ company.brewery_type }}
+    </p>
+    <ng-container *ngIf="isShowMore">
+    <p *ngIf="company.street">
+        Street: {{ company.street }}
+    </p>
+
+    
+    
+    <p *ngIf="company.city">
+        Description: {{ company.city }}
+    </p>
+    
+    <p *ngIf="company.state">
+        State: {{ company.state }}
+    </p>
+    </ng-container>
+    <button (click)="isShowMore = !isShowMore">
+        {{isShowMore? 'Show Less':'Show More'}}
+    </button>
+
+
+    
+</div>
